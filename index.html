@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="zh-TW" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>三和棉被店 地圖選擇與評論</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+    
+    .map-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .map-card:hover {
+      transform: translateY(-8px);
+    }
+    
+    .map-card:active {
+      transform: translateY(-2px);
+    }
+    
+    .pulse-dot {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.6;
+        transform: scale(1.1);
+      }
+    }
+    
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .review-card {
+      animation: slideIn 0.4s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .star {
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .star:hover {
+      transform: scale(1.2);
+    }
+
+    .star.active {
+      color: #FFD700;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app-wrapper" class="w-full h-full overflow-auto" style="background: linear-gradient(135deg, #fef3e2 0%, #fde8d0 50%, #fce4c4 100%);">
+   <div class="min-h-full flex flex-col px-4 py-8"><!-- Header -->
+    <div class="text-center mb-8">
+     <div class="float-animation mb-4">
+      <div class="w-20 h-20 mx-auto rounded-full flex items-center justify-center shadow-lg" style="background-color: #8B4513;"><span class="text-4xl">🛏️</span>
+      </div>
+     </div>
+     <h1 id="store-name" class="text-3xl md:text-4xl font-bold mb-2" style="color: #5D3A1A;">三和棉被店</h1>
+     <p id="welcome-message" class="text-lg md:text-xl" style="color: #8B6914;">選擇您偏好的地圖導航</p>
+    </div><!-- Location Info -->
+    <div class="rounded-2xl p-4 mb-8 flex items-center gap-3 shadow-md mx-auto" style="background-color: #FFFAF0;">
+     <div class="pulse-dot w-3 h-3 rounded-full flex-shrink-0" style="background-color: #D4A853;"></div>
+     <p id="store-address" class="text-sm md:text-base" style="color: #5D3A1A;">高雄市岡山區平安里維新路78號</p>
+    </div><!-- Map Options -->
+    <div class="flex flex-col sm:flex-row gap-6 w-full max-w-lg px-4 mx-auto mb-10"><!-- Google Maps Card --> <a href="https://www.google.com/maps/place/%E4%B8%89%E5%92%8C%E6%A3%89%E8%A2%AB%E5%BA%97/@22.7933444,120.2905603,17z/data=!3m1!4b1!4m6!3m5!1s0x346e0dc6b937aa71:0x3faf67fcca79895!8m2!3d22.7933395!4d120.2931352!16s%2Fg%2F11trnly01q?entry=ttu&amp;g_ep=EgoyMDI2MDIwNC4wIKXMDSoASAFQAw%3D%3D#Reviews" target="_blank" rel="noopener noreferrer" class="map-card flex-1 rounded-3xl p-6 shadow-xl cursor-pointer border-2 border-transparent hover:border-green-400" style="background: linear-gradient(145deg, #ffffff 0%, #f0f9f0 100%);">
+      <div class="flex flex-col items-center text-center">
+       <div class="w-16 h-16 mb-4 rounded-2xl flex items-center justify-center" style="background: linear-gradient(135deg, #34A853 0%, #4285F4 50%, #EA4335 100%);">
+        <svg class="w-10 h-10 text-white" viewbox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+        </svg>
+       </div>
+       <h2 class="text-xl font-bold mb-2" style="color: #1a73e8;">Google 地圖</h2>
+       <p class="text-sm mb-4" style="color: #5f6368;">導航 • 留言</p>
+       <div class="px-4 py-2 rounded-full text-white text-sm font-medium" style="background-color: #34A853;">
+        開啟 →
+       </div>
+      </div></a> <!-- Apple Maps Card --> <a href="https://maps.apple.com/place?place-id=I1A3AB39EE1280B1A&amp;address=820002%E5%8F%B0%E7%81%A3%E9%AB%98%E9%9B%84%E5%B8%82%E5%B2%A1%E5%B1%B1%E5%8D%80%E5%B9%B3%E5%AE%89%E9%87%8C%E7%B6%AD%E6%96%B0%E8%B7%AF78%E8%99%9F&amp;coordinate=22.793302%2C120.2930862&amp;name=%E4%B8%89%E5%92%8C%E6%A3%89%E8%A2%AB%E5%BA%97&amp;_provider=9902" target="_blank" rel="noopener noreferrer" class="map-card flex-1 rounded-3xl p-6 shadow-xl cursor-pointer border-2 border-transparent hover:border-gray-400" style="background: linear-gradient(145deg, #ffffff 0%, #f5f5f7 100%);">
+      <div class="flex flex-col items-center text-center">
+       <div class="w-16 h-16 mb-4 rounded-2xl flex items-center justify-center" style="background: linear-gradient(135deg, #42d778 0%, #3ed46d 50%, #34c759 100%);">
+        <svg class="w-10 h-10 text-white" viewbox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+        </svg>
+       </div>
+       <h2 class="text-xl font-bold mb-2" style="color: #1d1d1f;">Apple 地圖</h2>
+       <p class="text-sm mb-4" style="color: #86868b;">導航 • 留言</p>
+       <div class="px-4 py-2 rounded-full text-white text-sm font-medium" style="background-color: #34c759;">
+        開啟 →
+       </div>
+      </div></a>
+    </div><!-- Contact Section -->
+    <div class="w-full max-w-lg mx-auto mb-8 rounded-2xl p-4 text-center" style="background-color: #FFFAF0;">
+     <p class="text-sm mb-2" style="color: #5D3A1A;">有任何問題？</p><a href="mailto:sanhe@techmeow.tw" class="inline-flex items-center gap-2 text-sm font-medium transition hover:opacity-80" style="color: #8B4513;">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg> sanhe@techmeow.tw </a>
+    </div><!-- Footer -->
+    <div class="mt-10 text-center"><a href="https://sanhe.techmeow.tw" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-full transition-all hover:scale-105" style="background-color: #8B4513; color: #FFFAF0;">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+      </svg><span class="font-medium">回到官網</span> </a>
+     <p class="mt-4 text-sm" style="color: #8B6914;">感謝您的蒞臨 💛</p>
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      store_name: '三和棉被店',
+      store_address: '高雄市岡山區平安里維新路78號',
+      welcome_message: '選擇您偏好的地圖導航'
+    };
+
+    async function onConfigChange(config) {
+      const storeName = document.getElementById('store-name');
+      const storeAddress = document.getElementById('store-address');
+      const welcomeMessage = document.getElementById('welcome-message');
+      
+      if (storeName) {
+        storeName.textContent = config.store_name || defaultConfig.store_name;
+      }
+      if (storeAddress) {
+        storeAddress.textContent = config.store_address || defaultConfig.store_address;
+      }
+      if (welcomeMessage) {
+        welcomeMessage.textContent = config.welcome_message || defaultConfig.welcome_message;
+      }
+    }
+    
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+    
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['store_name', config.store_name || defaultConfig.store_name],
+        ['store_address', config.store_address || defaultConfig.store_address],
+        ['welcome_message', config.welcome_message || defaultConfig.welcome_message]
+      ]);
+    }
+    
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9cbb2b52166a4a30',t:'MTc3MDcyMTkyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
