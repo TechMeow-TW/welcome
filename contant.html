@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>三和棉被店 San He - 聯絡我們</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    html, body, #app-wrapper {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .font-serif-tc {
+      font-family: 'Noto Serif TC', serif;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .animate-fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    
+    .cotton-pattern {
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.08) 0%, transparent 40%),
+        radial-gradient(circle at 40% 80%, rgba(255,255,255,0.06) 0%, transparent 30%);
+    }
+
+    .content-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    input, textarea {
+      border-radius: 8px !important;
+    }
+
+    input:focus, textarea:focus {
+      outline: none !important;
+    }
+
+    .form-card {
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .form-card-header {
+      border-radius: 16px 16px 0 0;
+    }
+
+    button {
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body class="h-full m-0 p-0">
+  <div id="app-wrapper" class="h-full w-full overflow-auto" style="background-color: #2C3E50;">
+    <div class="cotton-pattern w-full flex items-center justify-center min-h-full py-8">
+      
+      <div class="content-container">
+        
+        <!-- Floating Cotton Icon -->
+        <div class="animate-float mb-8 opacity-0 animate-fade-in-up">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="35" r="12" fill="#F5E6D3" opacity="0.9"/>
+            <circle cx="30" cy="40" r="10" fill="#F5E6D3" opacity="0.85"/>
+            <circle cx="50" cy="40" r="10" fill="#F5E6D3" opacity="0.85"/>
+            <circle cx="35" cy="48" r="9" fill="#F5E6D3" opacity="0.8"/>
+            <circle cx="45" cy="48" r="9" fill="#F5E6D3" opacity="0.8"/>
+            <circle cx="40" cy="42" r="8" fill="#F5E6D3"/>
+            <path d="M40 55 L40 70 M38 58 L35 62 M42 58 L45 62" stroke="#8B7355" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        
+        <!-- Header -->
+        <header class="text-cen
