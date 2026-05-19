@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三和棉被店 - 電子報服務中心</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --bg-color: #f0f4f9;
+            --card-bg: #ffffff;
+            --primary-blue: #3b82f6;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --input-icon-bg: #f8fafc;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "微軟正黑體", sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* 滿頁式單頁卡片外殼 */
+        .page-container {
+            width: 100%;
+            max-width: 460px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            padding: 40px 30px;
+            display: none; /* 預設隱藏，由 JS 控制顯示 */
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .card.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 標題樣式 */
+        .header-title {
+            font-size: 26px;
+            font-weight: bold;
+            color: var(--text-dark);
+            text-align: center;
+            margin: 0 0 8px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-subtitle {
+            font-size: 15px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        /* 進度條 */
+        .progress-bar-container {
+            width: 100%;
+            height: 6px;
+            background-color: var(--border-color);
+            border-radius: 3px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary-blue);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* 輸入框組合 (仿圖片包含左側小圖示樣式) */
+        .input-group {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            background: #fff;
+            transition: border-color 0.2s;
+        }
+
+        .input-group:focus-within {
+            border-color: var(--primary-blue);
+        }
+
+        .input-icon {
+            width: 55px;
+            height: 55px;
+            background-color: var(--input-icon-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            border-right: 1px solid var(--border-color);
+            color: #475569;
+        }
+
+        .input-field {
+            flex: 1;
+            border: none;
+            padding: 16px;
+            font-size: 16px;
+            color: var(--text-dark);
+            outline: none;
+            background: transparent;
+        }
+
+        .input-field::placeholder {
+            color: #94a3b8;
+        }
+
+        /* 選擇服務（訂閱/退訂）特製大按鈕 */
+        .action-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .selector-btn {
+            padding: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            background: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--text-dark);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .selector-btn:hover {
+            border-color: var(--primary-blue);
+            background-color: #eff6ff;
+            color: var(--primary-blue);
+        }
+
+        /* 一般按鈕設計 */
+        .btn-primary {
+            width: 100%;
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 14px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+            margin-top: 10px;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto 0 auto;
+            text-decoration: underline;
+        }
+
+        /* 資訊確認清單 */
+        .summary-list {
+            background-color: #f8fafc;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .summary-item {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+        .summary-item:last-child { margin-bottom: 0; }
+
+        .summary-label {
+            color: var(--text-muted);
+            font-weight: normal;
+            display: inline-block;
+            width: 90px;
+        }
+
+        .hint-text {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: -10px;
+            margin-bottom: 20px;
+            padding-left: 5px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-container">
+
+    <div class="card active" id="step1">
+        <h2 class="header-title">📋 三和棉被店</h2>
+        <div class="header-subtitle">請選擇您要辦理的業務</div>
+        <div class="action-selector">
+            <button class="selector-btn" onclick="selectAction('subscribe')">🗞️ 訂閱電子報</button>
+            <button class="selector-btn" onclick="selectAction('unsubscribe')">❌ 取消訂閱電子報</button>
+        </div>
+    </div>
+
+    <div class="card" id="step2">
+        <div class="progress-bar-container"><div class="progress-bar" style="width: 33%"></div></div>
+        <h2 class="header-title">聯絡資訊設定</h2>
+        <div class="header-subtitle">請填寫您的電子郵件或手機</div>
+        
+        <div class="input-group">
+            <div class="input-icon">✉️</div>
+            <input type="email" id="email" class="input-field" placeholder="請輸入電子郵件">
+        </div>
+        
+        <div class="input-group">
+            <div class="input-icon">📞</div>
+            <input type="tel" id="phone" class="input-field" placeholder="09xxxxxxxx" maxlength="10">
+        </div>
+        <div class="hint-text">* 電子郵件與手機號碼可「擇一填寫」或「全填」。</div>
+
+        <button class="btn-primary" onclick="nextStep(3)">下一步 ➡️</button>
+        <button class="btn-secondary" onclick="prevStep(1)">返回上一步</button>
+    </div>
+
+    <div class="card" id="step3">
+        <div class="progress-bar-container"><div class="progress-bar" style="width: 66%"></div></div>
+        <h2 class="header-title">基本資料填寫</h2>
+        <div class="header-subtitle">請輸入您的真實姓名</div>
+        
+        <div class="input-group">
+            <div class="input-icon">👤</div>
+            <input type="text" id="lastName" class="input-field" placeholder="請輸入姓氏 (例：陳)">
+        </div>
+        
+        <div class="input-group">
+            <div class="input-icon">✍️</div>
+            <input type="text" id="firstName" class="input-field" placeholder="請輸入名字 (例：小明)">
+        </div>
+
+        <button class="btn-primary" onclick="nextStep(4)">下一步 ➡️</button>
+        <button class="btn-secondary" onclick="prevStep(2)">返回上一步</button>
+    </div>
+
+    <div class="card" id="step4">
+        <div class="progress-bar-container"><div class="progress-bar" style="width: 90%"></div></div>
+        <h2 class="header-title">基本資料填寫</h2>
+        <div class="header-subtitle">請選擇您的性別</div>
+        
+        <div class="input-group">
+            <div class="input-icon">🚻</div>
+            <select id="gender" class="input-field" style="appearance: none; -webkit-appearance: none;">
+                <option value="" disabled selected>請選擇性別</option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+                <option value="其他">其他 / 不便透露</option>
+            </select>
+        </div>
+
+        <button class="btn-primary" onclick="goToSummary()">填寫完成 ➡️</button>
+        <button class="btn-secondary" onclick="prevStep(3)">返回上一步</button>
+    </div>
+
+    <div class="card" id="step5">
+        <div class="progress-bar-container"><div class="progress-bar" style="width: 100%"></div></div>
+        <h2 class="header-title">🔍 確認資料並送出</h2>
+        <div class="header-subtitle">請確認以下資訊是否正確</div>
+        
+        <div class="summary-list">
+            <div class="summary-item"><span class="summary-label">辦理業務：</span><strong id="sumAction" style="color:var(--primary-blue)"></strong></div>
+            <div class="summary-item"><span class="summary-label">姓名：</span><span id="sumName"></span></div>
+            <div class="summary-item"><span class="summary-label">性別：</span><span id="sumGender"></span></div>
+            <div class="summary-item"><span class="summary-label">電子郵件：</span><span id="sumEmail"></span></div>
+            <div class="summary-item"><span class="summary-label">手機號碼：</span><span id="sumPhone"></span></div>
+        </div>
+
+        <button class="btn-primary" id="submitBtn" onclick="submitData()">🔍 確定送出</button>
+        <button class="btn-secondary" onclick="prevStep(4)" id="backTo4Btn">返回修改資料</button>
+        
+        <div style="text-align: center; margin-top: 30px; font-size: 12px; color: var(--text-muted); border-top: 1px dashed var(--border-color); padding-top: 15px;">
+            如有任何疑問，歡迎聯絡管理處<br>
+            📧 <a href="mailto:official@work.techmeow.tw" style="color: var(--primary-blue); text-decoration: none;">official@work.techmeow.tw</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // ⚠️ 請在下方貼上您從 Google Apps Script 部署取得的最新網頁應用程式 URL
+    const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzED-gxZ8P4vDYtdg104WaYLN9xoWTQ9BC4RqN-_pyKNGFhqhy_m5FCgnubEx71RaYAow/exec';
+
+    let formData = {
+        action: '',
+        email: '',
+        phone: '',
+        lastName: '',
+        firstName: '',
+        gender: ''
+    };
+
+    function selectAction(action) {
+        formData.action = action;
+        nextStep(2);
+    }
+
+    function nextStep(stepNum) {
+        // 步驟 2 驗證 (Email 與手機二擇一或全填)
+        if (stepNum === 3) {
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            if (!email && !phone) {
+                Swal.fire({ icon: 'warning', title: '提示', text: '「電子郵件」與「手機號碼」請至少填寫一項。' });
+                return;
+            }
+            // 驗證手機號碼必須是 09 開頭且共 10 碼數字
+            if (phone && !/^09\d{8}$/.test(phone)) {
+                Swal.fire({ icon: 'warning', title: '格式錯誤', text: '手機號碼請輸入 09 開頭的 10 位數號碼 (如: 0912345678)。' });
+                return;
+            }
+            formData.email = email;
+            formData.phone = phone;
+        }
+
+        // 步驟 3 驗證 (姓名欄位)
+        if (stepNum === 4) {
+            const lastName = document.getElementById('lastName').value.trim();
+            const firstName = document.getElementById('firstName').value.trim();
+            if (!lastName || !firstName) {
+                Swal.fire({ icon: 'warning', title: '提示', text: '請完整填寫您的姓氏與名字。' });
+                return;
+            }
+            formData.lastName = lastName;
+            formData.firstName = firstName;
+        }
+
+        switchCard(stepNum);
+    }
+
+    function prevStep(stepNum) {
+        switchCard(stepNum);
+    }
+
+    function goToSummary() {
+        const gender = document.getElementById('gender').value;
+        if (!gender) {
+            Swal.fire({ icon: 'warning', title: '提示', text: '請選擇您的性別。' });
+            return;
+        }
+        formData.gender = gender;
+
+        // 帶入最終確認頁面資料
+        document.getElementById('sumAction').innerText = formData.action === 'subscribe' ? '訂閱電子報' : '取消訂閱電子報';
+        document.getElementById('sumName').innerText = `${formData.lastName} ${formData.firstName}`;
+        document.getElementById('sumGender').innerText = formData.gender;
+        document.getElementById('sumEmail').innerText = formData.email || '(未填寫)';
+        document.getElementById('sumPhone').innerText = formData.phone || '(未填寫)';
+
+        switchCard(5);
+    }
+
+    function switchCard(step) {
+        document.querySelectorAll('.card').forEach(card => card.classList.remove('active'));
+        document.getElementById(`step${step}`).classList.add('active');
+    }
+
+    async function submitData() {
+        // 畫面上鎖與顯示載入狀態
+        document.getElementById('submitBtn').disabled = true;
+        document.getElementById('backTo4Btn').style.display = 'none';
+        Swal.fire({
+            title: '處理中',
+            text: '正在向系統確認名單，請稍候...',
+            allowOutsideClick: false,
+            didOpen: () => { Swal.showLoading(); }
+        });
+
+        try {
+            const response = await fetch(GAS_WEB_APP_URL, {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: { 'Content-Type': 'text/plain' }
+            });
+
+            const data = await response.json();
+            Swal.close();
+
+            if (data.result === 'success') {
+                Swal.fire({
+                    icon: 'success',
+                    title: '成功處理',
+                    text: data.message,
+                    confirmButtonColor: '#3b82f6'
+                }).then(() => {
+                    location.reload(); // 成功後重整網頁回到第一頁
+                });
+            } else if (['exists', 'already_unsubscribed', 'not_found'].includes(data.result)) {
+                Swal.fire({
+                    icon: 'info',
+                    title: '狀態通知',
+                    text: data.message,
+                    confirmButtonColor: '#3b82f6'
+                });
+                // 恢復按鈕供使用者返回修改
+                document.getElementById('submitBtn').disabled = false;
+                document.getElementById('backTo4Btn').style.display = 'block';
+            } else {
+                Swal.fire({ icon: 'error', title: '失敗', text: data.message });
+                document.getElementById('submitBtn').disabled = false;
+                document.getElementById('backTo4Btn').style.display = 'block';
+            }
+
+        } catch (error) {
+            Swal.close();
+            Swal.fire({ icon: 'error', title: '連線失敗', text: '系統目前無法連線，請確認後端部署。' });
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('backTo4Btn').style.display = 'block';
+        }
+    }
+</script>
+
+</body>
+</html>
