@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#173c32">
+<title>2026 第一屆聖誕感恩下午茶餐會｜網上報名說明</title>
+<style>
+:root{
+  --forest:#173c32;--forest2:#245344;--red:#9f3540;--gold:#d9b978;
+  --cream:#fffaf0;--ink:#343a35;--muted:#6e776f;--line:#e9e0d0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;padding:38px 16px 54px;color:var(--ink);
+  font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.9;
+  background:radial-gradient(ellipse at 12% 10%,#e6eadc 0,transparent 35%),
+             radial-gradient(ellipse at 90% 85%,#f0e1d5 0,transparent 34%),#f4f1e9;
+  overflow-x:hidden;
+}
+.snow-layer{position:fixed;inset:0;pointer-events:none;z-index:5;overflow:hidden}
+.snowflake{position:absolute;top:-30px;color:#fff;font-size:var(--size);opacity:var(--opacity);
+ text-shadow:0 1px 5px #b9c8c0;animation:fall var(--duration) linear var(--delay) infinite;
+ left:var(--left)}
+@keyframes fall{0%{transform:translate3d(0,-5vh,0) rotate(0)}100%{transform:translate3d(var(--drift),110vh,0) rotate(360deg)}}
+.wrap{max-width:900px;margin:auto;position:relative}
+.topline{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:18px;
+ color:var(--forest);font-size:12px;letter-spacing:.28em;font-weight:800;animation:fadeDown .9s both}
+.topline:before,.topline:after{content:"";height:1px;width:54px;background:var(--gold)}
+.card{position:relative;background:var(--cream);border:1px solid #e8deca;border-radius:26px;
+ overflow:hidden;box-shadow:0 24px 70px #293d3020;animation:cardIn 1s cubic-bezier(.2,.8,.2,1) both}
+.hero{position:relative;isolation:isolate;text-align:center;color:white;padding:54px 26px 48px;
+ background:linear-gradient(130deg,#15392f,#245746 58%,#173c32)}
+.hero:before,.hero:after{content:"";position:absolute;z-index:-1;border:1px solid #d9b97855;border-radius:50%;width:360px;height:360px}
+.hero:before{left:-210px;top:-240px}.hero:after{right:-220px;bottom:-270px}
+.hero .ornament{font-size:26px;color:#e8d2a2;letter-spacing:12px;animation:sway 4s ease-in-out infinite}
+.kicker{margin:8px 0 12px;color:#e5d2a5;font-size:12px;letter-spacing:.3em}
+h1{margin:0;font-size:clamp(25px,4.7vw,39px);line-height:1.45;letter-spacing:.04em}
+.hero-sub{margin:13px 0 0;color:#e8eee8;font-size:15px;letter-spacing:.18em}
+.hero-rule{width:76px;height:2px;background:var(--gold);margin:24px auto 0;position:relative}
+.hero-rule:after{content:"✦";position:absolute;left:50%;top:50%;transform:translate(-50%,-54%);padding:0 8px;background:#1d493b;color:var(--gold)}
+main{padding:38px clamp(22px,6vw,64px) 46px}
+.intro{font-size:16px}
+.salute{font-weight:800;font-size:18px;color:var(--forest);margin-bottom:10px}
+.deadline{display:inline-block;color:var(--red);font-weight:900;padding:0 7px;background:#f8e9df;border-radius:5px}
+.fee{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:26px 0;padding:18px 22px;
+ border:1px solid #e7d7b8;border-radius:14px;background:linear-gradient(110deg,#fbf3e3,#fffaf0)}
+.fee-label{font-size:14px;color:#75694f}.fee-price{font-size:clamp(22px,4vw,29px);font-weight:900;color:var(--red);white-space:nowrap}
+.fee-price small{font-size:14px;color:var(--muted);font-weight:600}
+.section{margin-top:30px}
+h2{display:flex;align-items:center;gap:12px;margin:0 0 14px;color:var(--forest);font-size:21px}
+h2 .num{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#e8eee5;color:var(--forest);font-size:13px}
+p{margin:0 0 14px}
+.cta-wrap{text-align:center;padding:8px 0 4px}
+.cta{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;
+ min-width:min(100%,290px);padding:14px 28px;border-radius:999px;color:#fff;text-decoration:none;
+ font-weight:800;letter-spacing:.06em;background:linear-gradient(110deg,#a43b45,#812c38);
+ box-shadow:0 9px 22px #8b30352e;transition:transform .25s,box-shadow .25s;animation:pulse 2.8s ease-in-out infinite}
+.cta:hover{transform:translateY(-4px);box-shadow:0 14px 28px #8b30354a}
+.cta:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+.cta .arrow{font-size:20px;transition:transform .25s}.cta:hover .arrow{transform:translateX(5px)}
+.url-hint{font-size:12px;color:#8b9189;margin-top:9px;overflow-wrap:anywhere}
+.details{display:grid;gap:12px;margin-top:14px}
+.detail{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:15px 17px;border:1px solid var(--line);
+ border-radius:13px;background:#fffdf8}
+.detail-icon{width:32px;height:32px;display:grid;place-items:center;background:#f3eee3;border-radius:50%;font-size:16px}
+.detail strong{color:var(--red)}
+.notice{margin-top:24px;padding:17px 19px;border-left:4px solid var(--gold);background:#f7f3e9;border-radius:0 12px 12px 0}
+.signoff{text-align:right;font-weight:700;color:var(--forest);margin:28px 0 18px}
+.contact{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:14px}
+.contact strong{color:var(--forest)}
+.contact a{color:var(--red);text-decoration-thickness:1px;text-underline-offset:3px}
+.footer{text-align:center;padding:17px 14px;background:#f3eee4;color:#827b6e;font-size:11px;letter-spacing:.2em}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .75s ease,transform .75s ease}
+.reveal.visible{opacity:1;transform:none}
+@keyframes cardIn{from{opacity:0;transform:translateY(28px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@keyframes sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes pulse{0%,100%{box-shadow:0 9px 22px #8b30352e}50%{box-shadow:0 9px 30px #c05a5a55}}
+@media(max-width:560px){body{padding:18px 10px 32px}.hero{padding:42px 18px 38px}main{padding:28px 20px 34px}.fee{align-items:flex-start;flex-direction:column;gap:2px}.topline{letter-spacing:.16em}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.snow-layer{display:none}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="snow-layer" aria-hidden="true" id="snow"></div>
+<div class="wrap">
+  <div class="topline">A SEASON OF GRATITUDE</div>
+  <article class="card">
+    <header class="hero">
+      <div class="ornament" aria-hidden="true">✦ ❄ ✦</div>
+      <p class="kicker">CHRISTMAS · THANKSGIVING · AFTERNOON TEA</p>
+      <h1>2026年第一屆<br>聖誕感恩下午茶餐會</h1>
+      <p class="hero-sub">網上報名說明</p>
+      <div class="hero-rule"></div>
+    </header>
+
+    <main>
+      <section class="intro reveal">
+        <p class="salute">親愛的貴賓您好：</p>
+        <p>為了更方便統計餐食數量，請於 <strong class="deadline">11/30日</strong> 前完成報名。您亦可使用紙本報名表；不過，網上報名會更加方便。</p>
+        <div class="fee">
+          <div><div class="fee-label">本活動參與金額</div><strong>活動費用包含餐食、飲品及場地維護費等。</strong></div>
+          <div class="fee-price">75 <small>元／人</small></div>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <h2><span class="num">01</span>透過網上報名｜報名方式</h2>
+        <p>請點選下方按鈕，進入活動報名頁面填寫資料：</p>
+        <div class="cta-wrap">
+          <a class="cta" href="https://events.techmeow.tw/event/1/2026?promo_code=ef0pf" target="_blank" rel="noopener noreferrer">
+            <span aria-hidden="true">✧</span> 前往線上報名 <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <div class="url-hint">點擊按鈕即可開啟線上報名頁面</div>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <h2><span class="num">02</span>報名資料填寫提醒</h2>
+        <div class="details">
+          <div class="detail"><span class="detail-icon" aria-hidden="true">🎟</span><div><strong>請依實際票別填寫。</strong><br>姓名及姓氏請填寫代表人的姓名。</div></div>
+          <div class="detail"><span class="detail-icon" aria-hidden="true">✉</span><div>電子郵件可填寫或不填寫；若不填寫，請填入 <a href="mailto:office@work.techmeow.tw">office@work.techmeow.tw</a>。</div></div>
+          <div class="detail"><span class="detail-icon" aria-hidden="true">📮</span><div>屆時票券將由主辦單位於活動開始前一週內，投遞至貴樓層的信箱，並註明 <strong>「社區大小事」</strong>。</div></div>
+        </div>
+      </section>
+
+      <section class="notice reveal">
+        除不可抗力因素外，如因事假無法出席，請於活動開始至少三天前提出，以利餐食等退費事宜辦理。
+      </section>
+
+      <p class="signoff reveal">順頌　時綏</p>
+      <div class="contact reveal">
+        <strong>主辦單位：</strong>4樓<br>
+        <strong>聯絡方式：</strong><a href="mailto:office@work.techmeow.tw">office@work.techmeow.tw</a><br>
+        或親洽本棟4樓401辦公室，謝謝。
+      </div>
+    </main>
+    <footer class="footer">2026 CHRISTMAS GRATITUDE AFTERNOON TEA · WITH THANKS</footer>
+  </article>
+</div>
+<script>
+(() => {
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    const layer = document.getElementById('snow');
+    const symbols = ['❄','✦','·'];
+    for (let i=0;i<34;i++) {
+      const flake = document.createElement('span');
+      flake.className = 'snowflake';
+      flake.textContent = symbols[i % symbols.length];
+      flake.style.setProperty('--left', (Math.random()*100)+'%');
+      flake.style.setProperty('--size', (8+Math.random()*13)+'px');
+      flake.style.setProperty('--opacity', (.35+Math.random()*.55).toFixed(2));
+      flake.style.setProperty('--duration', (9+Math.random()*13)+'s');
+      flake.style.setProperty('--delay', (-Math.random()*20)+'s');
+      flake.style.setProperty('--drift', ((Math.random()-.5)*110)+'px');
+      layer.appendChild(flake);
+    }
+    const items = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {threshold:.12});
+      items.forEach(item => observer.observe(item));
+    } else items.forEach(item => item.classList.add('visible'));
+  } else {
+    document.querySelectorAll('.reveal').forEach(item => item.classList.add('visible'));
+  }
+})();
+</script>
+</body>
+</html>
