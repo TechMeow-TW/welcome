@@ -61,6 +61,8 @@ p{margin:0 0 14px}
 .cta:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
 .cta .arrow{font-size:20px;transition:transform .25s}.cta:hover .arrow{transform:translateX(5px)}
 .url-hint{font-size:12px;color:#8b9189;margin-top:9px;overflow-wrap:anywhere}
+.hievents-widget{width:100%;max-width:100%;margin:10px auto 0;text-align:left}
+.hievents-widget iframe{max-width:100%}
 .details{display:grid;gap:12px;margin-top:14px}
 .detail{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:15px 17px;border:1px solid var(--line);
  border-radius:13px;background:#fffdf8}
@@ -81,6 +83,8 @@ p{margin:0 0 14px}
 @media(max-width:560px){body{padding:18px 10px 32px}.hero{padding:42px 18px 38px}main{padding:28px 20px 34px}.fee{align-items:flex-start;flex-direction:column;gap:2px}.topline{letter-spacing:.16em}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.snow-layer{display:none}.reveal{opacity:1;transform:none}}
 </style>
+  
+<script async src="https://events.techmeow.tw/widget.js"></script>
 </head>
 <body>
 <div class="snow-layer" aria-hidden="true" id="snow"></div>
@@ -109,10 +113,11 @@ p{margin:0 0 14px}
         <h2><span class="num">01</span>透過網上報名｜報名方式</h2>
         <p>請點選下方按鈕，進入活動報名頁面填寫資料：</p>
         <div class="cta-wrap">
-          <a class="cta" href="https://events.techmeow.tw/event/1/2026?promo_code=ef0pf" target="_blank" rel="noopener noreferrer">
-            <span aria-hidden="true">✧</span> 前往線上報名 <span class="arrow" aria-hidden="true">→</span>
-          </a>
-          <div class="url-hint">點擊按鈕即可開啟線上報名頁面</div>
+          <div class="hievents-widget"
+            data-hievents-organizer-id="1"
+            data-hievents-widget-type="events"
+            data-hievents-widget="wgt_oAiz3PaU4w9gG">
+          </div>
         </div>
       </section>
 
